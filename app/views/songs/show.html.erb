@@ -1,0 +1,8 @@
+<div class="song">
+  <h2><%= @song.title %></h2>
+  <pre id="our-god-chords"><%= @song.text %></pre>
+  <div class="meta">
+    <%= @song.artist %> <%= !@song.year.blank? ? @song.year.strftime('%Y') : '' %>
+    <span class="license"><%= @song.license %></span>
+  </div>
+</div>

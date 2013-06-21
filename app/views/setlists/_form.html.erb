@@ -1,0 +1,8 @@
+<%= form_for(@setlist) do |f| %>
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title, :autofocus => true %>
+  </div><br /><br />
+
+  <%= f.submit "#{params[:action] == "edit" ? "Edit" : "Add"} Setlist", :class => "button" %>
+<% end %>

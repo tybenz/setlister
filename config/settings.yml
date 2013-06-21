@@ -1,0 +1,17 @@
+development:
+  :host: "localhost:8088"
+  :smtp:
+    :domain: "localhost:8088"
+    :host: "localhost:8088"
+    :port: 587
+    :username: "setlister"
+    :password: "setlister"
+
+production:
+  :host: "setlister.tybenz.com"
+  :smtp:
+    :domain: "setlister.tybenz.com"
+    :host: <%= ENV['MAILGUN_SMTP_SERVER'] %>
+    :port: <%= ENV['MAILGUN_SMTP_PORT'] %>
+    :username: <%= ENV['MAILGUN_SMTP_LOGIN'] %>
+    :password: <%= ENV['MAILGUN_SMTP_PASSWORD'] %>

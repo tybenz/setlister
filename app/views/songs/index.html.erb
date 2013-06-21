@@ -1,0 +1,48 @@
+<% content_for :javascripts do %>
+  <%= javascript_include_tag "key.selector" %>
+  <%= javascript_include_tag "setlists" %>
+  <script type="text/javascript" charset="utf-8">
+    $( function() {
+      $( '.key-selector' ).keySelector();
+    });
+  </script>
+  <script type="text/mustache" id="flyout-template" charset="utf-8">
+    <ul>
+      <li class="head">Add to Setlist</li>
+      {{# setlists }}
+        <li data-id="{{ id }}">{{ title }}<i class="icon-refresh icon-spin"></i><i class="icon-ok"></i></li>
+      {{/ setlists }}
+    </ul>
+  </script>
+<% end %>
+
+<h2 class="page-header">Songs<%= link_to "Add", new_song_path, :class => "add button" %></h2>
+<div class="builder">
+  <div class="builder-inner">
+    <table>
+      <tr>
+        <th width="50"></th>
+        <th width="510">Name</th>
+        <th width="500">Key</th>
+        <th width="210">Actions</th>
+      </tr>
+      <% i = 1 %>
+      <% @songs.each do |song| %>
+      <tr>
+        <td><%= i %>.</td>
+        <td class="song-name"><%= link_to(song.title, song_path(song)) %></td>
+        <td class="key-selector" data-key="<%= song.data_key %>" data-song=""></td>
+        <td class="actions">
+          <%= link_to("", song_path(song), :class => "icon-eye-open") %>
+          <%= link_to("", edit_song_path(song), :class => "icon-pencil") %>
+          <%= link_to("", song_path(song), :class => "icon-trash", :method => "delete", :confirm => "Are you sure?") %>
+          <%= link_to("", "#", :class => "icon-plus-sign add-to-setlist-link", :"data-id" => song.id, :"data-key" => song.key) %>
+        </td>
+      </tr>
+      <% i += 1 %>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<%= render "layouts/flyout" %>

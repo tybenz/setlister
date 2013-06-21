@@ -1,0 +1,25 @@
+<h2 class="page-header">Setlists<%= link_to "Add", new_setlist_path, :class => "add button" %></h2>
+<div class="builder">
+  <div class="builder-inner">
+    <table>
+      <tr>
+        <th width="50"></th>
+        <th width="1110">Name</th>
+        <th width="149">Actions</th>
+      </tr>
+      <% i = 1 %>
+      <% @setlists.each do |setlist| %>
+      <tr>
+        <td><%= i %>.</td>
+        <td class="setlist-name"><%= link_to(setlist.title, setlist_path(setlist)) %></td>
+        <td class="actions">
+          <%= link_to("", setlist_path(setlist), :class => "icon-eye-open") %>
+          <%= link_to("", edit_setlist_path(setlist), :class => "icon-pencil") %>
+          <%= link_to("", setlist_path(setlist), :class => "icon-trash", :method => "delete", :confirm => "Are you sure?") %>
+        </td>
+      </tr>
+      <% i += 1 %>
+      <% end %>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+@import 'bourbon';
+@import 'neat';
+
+body {
+  font-family: sans-serif;
+}
+
+header {
+  display: none;
+}
+
+.builder {
+  display: none;
+}
+
+.pin-wrapper {
+  display: none;
+}
+
+.page-header {
+  display: none;
+}
+
+.song {
+  @include box-shadow(none);
+  page-break-after: always;
+}
+
+.song {
+  border: 1px solid #333;
+  margin-top: 20px;
+  pre {
+    margin: 20px;
+  }
+  .icon-headphones {
+    color: inherit;
+    text-decoration: none;
+  }
+  .meta {
+    -webkit-print-color-adjust: exact;
+    font-size: 0.8em;
+    background: #333;
+    color: white;
+    padding: 6px 10px;
+    .license {
+      float: right;
+    }
+  }
+}
+
+.builder, .song {
+  h2 {
+    padding: 10px;
+    margin: 0;
+    border-bottom: 1px solid black;
+    background-color: #333;
+    color: white;
+    position: relative;
+    -webkit-print-color-adjust: exact;
+    .capo {
+      font-size: 0.6em;
+      position: absolute;
+      right: 10px;
+      bottom: 16px;
+    }
+  }
+}

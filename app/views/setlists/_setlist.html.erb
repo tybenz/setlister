@@ -1,0 +1,82 @@
+<% content_for :javascripts do %>
+  <%= javascript_include_tag "key.selector" %>
+  <%= javascript_include_tag "jquery.pin" %>
+  <%= javascript_include_tag "spotify" %>
+  <%= javascript_include_tag "setlists" %>
+  <script type="text/javascript" charset="utf-8">
+    $( function() {
+      $( '.key-selector' ).keySelector();
+      $( '.capo-selector' ).keySelector( true );
+      Spotify.init();
+    });
+  </script>
+<% end %>
+
+<% if params[:action] == "edit" %>
+  <%= form_for(@setlist) do |f| %>
+  <div class="hidden-form">
+    <%= f.fields_for :setlist_songs do |builder| %>
+      <div class="song-fields">
+        <%= builder.hidden_field :position %>
+        <%= builder.hidden_field :data_key %>
+        <%= builder.hidden_field :capo %>
+      </div>
+    <% end %>
+  </div>
+  <% end %>
+<% end %>
+
+<div class="builder">
+  <h2>Setlist: <%= @setlist.title %> <%= link_to("Save", "#", :class => "save-setlist button") if params[:action] == "edit" %></h2>
+  <div class="spotify-player" id="spotify-player">
+    <iframe src="https://embed.spotify.com/?uri=<%= @setlist.setlist_songs.first ? @setlist.setlist_songs.first.spotify_uri : "" %>" width="100%" height="80" frameborder="0" allowtransparency="true"></iframe>
+  </div>
+  <div class="builder-inner">
+    <table>
+      <tr class="header">
+        <th width="50"></th>
+        <th width="510">Name</th>
+        <th width="500">Key</th>
+        <th width="60">Capo</th>
+        <th width="149">Actions</th>
+      </tr>
+      <% i = 1 %>
+      <% @setlist.setlist_songs.each do |song| %>
+      <tr data-old-pos="<%= song.position %>" data-pos="<%= song.position %>">
+        <td><input <%= 'disabled="disabled" ' if params[:action] != 'edit' %>type="text" value="<%= i %>" class="order-field" size="1" style="text-align: right"></td>
+        <td class="song-name"><%= link_to(song.title, song_path(song)) %></td>
+        <td class="key-selector" data-start="<%= song.key %>" data-key="<%= song.song.key %>" data-song="<%= song.title.gsub( ' ', '-' ) %>-chords"></td>
+        <td>
+          <select value="<%= song.capo %>" class="capo-selector" id="" name="" data-song="<%= song.title.gsub( ' ', '-' ) %>-chords">
+            <option value="0">--</option>
+            <% 12.times do |i| %>
+              <option <%= 'selected="selected" ' if song.capo == i+1 %>value="<%= i+1 %>"><%= i+1 %></option>
+            <% end %>
+          </select>
+        </td>
+        <td class="actions">
+          <%= link_to("", song_path(song.song), :class => "icon-eye-open") %>
+          <%= link_to("", edit_song_path(song.song), :class => "icon-pencil") %>
+          <%= link_to("", setlist_song_path(song), :class => "icon-trash", :method => "delete", :confirm => "Are you sure?") %>
+          <%= link_to("", "#", :class => "icon-headphones", :"data-spotify-uri" => song.spotify_uri) %>
+        </td>
+      </tr>
+      <% i += 1 %>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<% @setlist.setlist_songs.each do |song| %>
+<div class="song">
+  <h2 data-header="<%= song.title.gsub( ' ', '-' ) %>-chords">
+    <%= song.title %>
+    <%= link_to("", "#", :class => "icon-headphones", :"data-spotify-uri" => song.spotify_uri) %>
+  </h2>
+  <pre id="<%= song.title.gsub( ' ', '-' ) %>-chords"><%= song.text %></pre>
+  <div class="meta">
+    <%= song.artist %> <%= !song.year.blank? ? song.year.strftime('%Y') : '' %>
+    <span class="license"><%= song.license %></span>
+  </div>
+</div>
+<% end %>

@@ -1,0 +1,74 @@
+<% content_for :javascripts do %>
+  <%= javascript_include_tag "spotify" %>
+  <script type="text/javascript" charset="utf-8">
+    $(function() {
+      Spotify.init();
+    });
+  </script>
+  <script type="text/mustache" id="spotify-results-template" charset="utf-8">
+    {{# tracks }}
+    <div class="result">
+      <div class="embed">
+        <iframe src="https://embed.spotify.com/?uri={{href}}" width="80" height="80" frameborder="0" allowtransparency="true"></iframe>
+      </div>
+      <div class="info">
+        <p>
+          {{ name }}
+        </p>
+        <p>
+          {{ artist.name }}
+        </p>
+        <a href="#" class="button" data-link-to-spotify="{{href}}">Link <span class="icon-link"></span><span class="icon-refresh icon-spin"></span><span class="icon-ok"></span></a>
+      </div>
+    </div>
+    {{/ tracks }}
+  </script>
+<% end %>
+<div class="field">
+  <%= f.label :title %>
+  <%= f.text_field :title, :autofocus => true %>
+</div>
+
+<div class="field">
+  <%= f.label :artist %>
+  <%= f.text_field :artist %>
+</div>
+
+<div class="field">
+  <%= f.label :year %>
+  <%= f.text_field :year %>
+</div>
+
+<div class="field">
+  <%= f.label :data_key, "Key" %>
+  <%= f.text_field :data_key %>
+</div><br /><br />
+
+<div class="song-wrapper">
+  <div class="spotify-link-panel">
+    <div class="icon-spotify"></div>
+    <div class="field hidden">
+      <%= f.hidden_field :spotify_uri, :id => "spotify-uri-field" %>
+    </div>
+  </div>
+  <div class="spotify-search-panel">
+    <div class="search-form">
+      <div class="field">
+        <label for="spotify-search-field">Search</label>
+        <input type="text" id="spotify-search-field" class="spotify-search-field" />
+      </div>
+      <div class="field">
+        <a href="#" class="button">Go</a>
+      </div>&nbsp;&nbsp;<span class="icon-refresh icon-spin"></span>
+      <a href="#" class="icon-remove"></a><br /><br />
+    </div>
+
+    <div class="spotify-search-results">
+    </div>
+  </div>
+
+  <div class="field textarea">
+    <%= f.label :text, "Chords" %>
+    <%= f.text_area :text %>
+  </div><br /><br />
+</div>

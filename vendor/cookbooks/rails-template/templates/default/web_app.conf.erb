@@ -1,0 +1,22 @@
+<VirtualHost *:80>
+  DocumentRoot <%= @params[:docroot] %>
+
+  <% if node[:instance_role] == "vagrant" %>
+  EnableSendfile Off
+  <% end %>
+
+  RailsEnv <%= @params[:rails_env] %>
+  PassengerMinInstances 1
+  PassengerMaxInstancesPerApp 3
+
+  <Directory <%= @params[:docroot] %>>
+    Options FollowSymLinks
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+  </Directory>
+
+  LogLevel info
+  ErrorLog <%= node[:apache][:log_dir] %>/<%= @params[:name] %>-error.log
+  CustomLog <%= node[:apache][:log_dir] %>/<%= @params[:name] %>-access.log combined
+</VirtualHost>

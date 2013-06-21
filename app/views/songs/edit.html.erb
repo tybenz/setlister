@@ -1,0 +1,5 @@
+<%= form_for(@song) do |f| %>
+  <h2 class="page-header">Edit Song <%= f.submit "Save", :class => "add button" %></h2>
+
+  <%= render "form", :f => f %>
+<% end %>

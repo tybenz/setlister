@@ -1,0 +1,42 @@
+<?php
+$type = 'text/javascript';
+$files = array(
+    'wp-core.js',
+    'wp-request-animation-frame.js',
+    'wp-node.js',
+    'wp-vmouse.js',
+    'wp-image-loader.js',
+    'wp-selection.js',
+    'wp-selection-outline.js',
+    'wp-drag-tracker.js',
+    'wp-drag-tracker-delegate.js',
+    'wp-momentum-drag-tracker.js',
+    'wp-swipe-tracker.js',
+    'wp-widget.js',
+    'wp-button.js',
+    'wp-radio-group.js',
+    'wp-tab-group.js',
+    'wp-panel-group.js',
+    'wp-disclosure-widget.js',
+    'wp-disclosure-widget-plugins.js',
+    'wp-slideshow.js',
+    'wp-content-slideshow.js',
+    'wp-content-slideshow-plugins.js',
+    'wp-slider.js',
+    'wp-slider2d.js',
+    'wp-form.js',
+    'wp-animator.js',
+    'wp-scrollview.js',
+    'wp-display.js',
+    'wp-swipe-panel-group.js',
+    'wp-swipe-panel-group-plugins.js',
+    'wp-simple-momentum-scrollview.js',
+    'wp-parallax-panel-group.js',
+    'wp-edge-web-fonts.js',
+    'wp-infinite-scroller.js',
+    'wp-scroll-triggers.js',
+    'wp-color.js',
+    'wp-colorpicker.js'
+);
+
+require_once('combine.php');

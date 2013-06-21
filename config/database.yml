@@ -1,0 +1,16 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: development
+  username: admin
+  host: localhost
+  pool: 5
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: test
+  username: admin
+  host: localhost
+  pool: 5
+
+# NOTE production = heroku

@@ -1,0 +1,26 @@
+<% content_for :javascripts do %>
+  <%= javascript_include_tag "key.selector" %>
+  <%= javascript_include_tag "jquery.pin" %>
+  <script type="text/javascript" charset="utf-8">
+    $( function() {
+      $( '.key-selector' ).keySelector();
+      $( '.capo-selector' ).keySelector( true );
+    });
+  </script>
+<% end %>
+<% if flash[:notice] %>
+  <div class="flash notice">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+<div class="song hero">
+  <h2>
+    &nbsp;
+    <% if signed_in? %>
+      <%= link_to "", destroy_user_session_path, :method => :delete, :class => "auth" %>
+    <% else %>
+      <%= link_to "", new_user_session_path, :class => "auth" %>
+    <% end %>
+  </h2>
+  <h1>Setlister</h1>
+</div>

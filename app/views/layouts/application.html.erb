@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Setlister</title>
+  <%= stylesheet_link_tag "application" %>
+  <%= stylesheet_link_tag "print", :media => "print" %>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a class="logo" href="<%= root_url %>">Setlister</a></li>
+        <li><a href="<%= songs_path %>">Songs</a></li>
+        <li><a href="<%= setlists_path %>">Setlists</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section>
+    <%= yield %>
+  </section>
+</body>
+<%= javascript_include_tag "application" %>
+<%= yield :javascripts %>
+</html>

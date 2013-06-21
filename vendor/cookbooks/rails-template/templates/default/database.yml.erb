@@ -1,0 +1,11 @@
+<% node[:postgresql][:databases].each do |db_name| %>
+<%= db_name %>:
+  adapter: postgresql
+  encoding: unicode
+  database: <%= db_name %>
+  username: <%= node[:postgres][:admin] %>
+  host: localhost
+  pool: 5
+<% end %>
+
+# NOTE production = heroku
