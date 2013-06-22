@@ -44,7 +44,7 @@
       <% @setlist.setlist_songs.each do |song| %>
       <tr data-old-pos="<%= song.position %>" data-pos="<%= song.position %>">
         <td><input <%= 'disabled="disabled" ' if params[:action] != 'edit' %>type="text" value="<%= i %>" class="order-field" size="1" style="text-align: right"></td>
-        <td class="song-name"><%= link_to(song.title, song_path(song)) %></td>
+        <td class="song-name"><%= link_to(song.title, "##{song.title.gsub( ' ', '-' )}-chords", :class => "song-shortcut") %></td>
         <td class="key-selector" data-start="<%= song.key %>" data-key="<%= song.song.key %>" data-song="<%= song.title.gsub( ' ', '-' ) %>-chords"></td>
         <td>
           <select value="<%= song.capo %>" class="capo-selector" id="" name="" data-song="<%= song.title.gsub( ' ', '-' ) %>-chords">

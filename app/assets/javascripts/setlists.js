@@ -85,4 +85,12 @@ $(function() {
       $capo.val( capo );
     });
   });
+
+  $( '.song-shortcut' ).click( function( evt ) {
+    evt.preventDefault();
+    var id = $( this ).attr( 'href' );
+
+    console.log(id);
+    window.scroll( 0, $( id ).offset().top - 160 );
+  });
 });
