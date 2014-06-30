@@ -1,26 +1,21 @@
-<% content_for :javascripts do %>
-  <%= javascript_include_tag "key.selector" %>
-  <%= javascript_include_tag "jquery.pin" %>
-  <script type="text/javascript" charset="utf-8">
-    $( function() {
-      $( '.key-selector' ).keySelector();
-      $( '.capo-selector' ).keySelector( true );
-    });
-  </script>
-<% end %>
-<% if flash[:notice] %>
-  <div class="flash notice">
-    <%= flash[:notice] %>
-  </div>
-<% end %>
-<div class="song hero">
-  <h2>
-    &nbsp;
-    <% if signed_in? %>
-      <%= link_to "", destroy_user_session_path, :method => :delete, :class => "auth" %>
-    <% else %>
-      <%= link_to "", new_user_session_path, :class => "auth" %>
-    <% end %>
-  </h2>
-  <h1>Setlister</h1>
+<h1>Setlister</h1>
+
+<h2>Sign up</h2>
+
+<div class="row">
+  <%= form_for(@user, :as => :user, :url => registration_path(:user), :html => { :class => "col-sm-4" }) do |f| %>
+    <div class="form-group">
+      <%= f.email_field :email, :autofocus => true, :placeholder => "Email", :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.password_field :password, :placeholder => "Password", :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.password_field :password_confirmation, :placeholder => "Password Again", :class => "form-control" %>
+    </div>
+
+    <div><%= f.submit "Sign up", :class => "btn btn-primary" %></div>
+  <% end %>
 </div>

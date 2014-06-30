@@ -1,5 +1,7 @@
 class SongsController < ApplicationController
   before_filter :is_admin, :except => [:index, :show]
+  before_filter :group
+
   respond_to :html, :json
 
   def new
@@ -12,7 +14,7 @@ class SongsController < ApplicationController
     @song = Song.new(params[:song])
 
     if @song.save
-      respond_with @song
+      redirect_to group_song_path(@group, @song)
     else
       redirect_to new_song_path
     end
@@ -41,7 +43,7 @@ class SongsController < ApplicationController
     @song = Song.find(params[:id])
 
     if @song.update_attributes(params[:song])
-      respond_with @song
+      redirect_to group_song_path(@group, @song)
     else
       redirect_to edit_song_path(@song)
     end
@@ -52,7 +54,7 @@ class SongsController < ApplicationController
 
     @song.destroy
 
-    redirect_to song_path(@song)
+    redirect_to group_songs_path(@group)
   end
 
   private
@@ -61,5 +63,9 @@ class SongsController < ApplicationController
       flash[:notice] = "You have to be an admin to do that."
       redirect_to root_path
     end
+  end
+
+  def group
+    @group = Group.where("lower(name) = ?", params[:group_id].downcase).first
   end
 end

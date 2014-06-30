@@ -5,6 +5,7 @@ gem 'rails', '3.2.3'
 gem 'pg'
 gem 'devise'
 gem 'devise_invitable', '~> 1.1.0'
+gem 'rails_autolink'
 
 # Gems used only for assets and not required
 # in production environments by default.

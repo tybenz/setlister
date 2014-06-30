@@ -24,51 +24,61 @@
     {{/ tracks }}
   </script>
 <% end %>
-<div class="field">
-  <%= f.label :title %>
-  <%= f.text_field :title, :autofocus => true %>
-</div>
 
-<div class="field">
-  <%= f.label :artist %>
-  <%= f.text_field :artist %>
-</div>
-
-<div class="field">
-  <%= f.label :year %>
-  <%= f.text_field :year %>
-</div>
-
-<div class="field">
-  <%= f.label :data_key, "Key" %>
-  <%= f.text_field :data_key %>
-</div><br /><br />
-
-<div class="song-wrapper">
-  <div class="spotify-link-panel">
-    <div class="icon-spotify"></div>
-    <div class="field hidden">
-      <%= f.hidden_field :spotify_uri, :id => "spotify-uri-field" %>
-    </div>
-  </div>
-  <div class="spotify-search-panel">
-    <div class="search-form">
-      <div class="field">
-        <label for="spotify-search-field">Search</label>
-        <input type="text" id="spotify-search-field" class="spotify-search-field" />
+<div id="spotify-modal" class="modal fade" aria-labelledby="spotify-modal-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Link to Spotify</h3>
       </div>
-      <div class="field">
-        <a href="#" class="button">Go</a>
-      </div>&nbsp;&nbsp;<span class="icon-refresh icon-spin"></span>
-      <a href="#" class="icon-remove"></a><br /><br />
-    </div>
-
-    <div class="spotify-search-results">
+      <div class="modal-body">
+        <form class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon"><span class="icon icon-search"></span></span>
+            <input class="form-control" type="search">
+            <span class="input-group-btn">
+              <button class="btn btn-success" type="button">Search</button>
+            </span>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
+</div>
 
-  <div class="field textarea">
-    <%= f.label :text, "Chords" %>
-    <%= f.text_area :text %>
-  </div><br /><br />
+<div class="well form-horizontal">
+  <div class="form-group">
+    <%= f.label :title, :class => "control-label col-sm-1" %>
+    <div class="col-sm-3">
+      <%= f.text_field :title, :class => "form-control", :autofocus => true %>
+    </div>
+    <%= f.label :artist, :class => "control-label col-sm-1" %>
+    <div class="col-sm-3">
+      <%= f.text_field :artist, :class => "form-control" %>
+    </div>
+    <%= f.label :year_string, "Year", :class => "control-label col-sm-1" %>
+    <div class="col-sm-3">
+      <%= f.text_field :year_string, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :data_key, "Key", :class => "control-label col-sm-1" %>
+    <div class="col-sm-3">
+      <%= f.text_field :data_key, :class => "form-control" %>
+    </div>
+    <%= f.label :license, :class => "control-label col-sm-1" %>
+    <div class="col-sm-3">
+      <%= f.text_field :license, :class => "form-control" %>
+    </div>
+    <%= f.label :info, :class => "control-label col-sm-1" %>
+    <div class="col-sm-3">
+      <%= f.text_field :info, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :text, :class => "control-label col-sm-1" %>
+    <div class="col-sm-11">
+      <%= f.text_area :text, :class => "form-control", :rows => "100" %>
+    </div>
+  </div>
 </div>

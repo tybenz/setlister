@@ -1,0 +1,11 @@
+<h2>New Group</h2>
+
+<div class="row">
+  <%= form_for(@group, :html => { :class => "col-sm-4" }) do |f| %>
+    <div class="form-group">
+      <%= f.text_field :name, :autofocus => true, :placeholder => "Group Name", :class => "form-control" %>
+    </div>
+
+    <div><%= f.submit "Add", :class => "btn btn-primary" %></div>
+  <% end %>
+</div>

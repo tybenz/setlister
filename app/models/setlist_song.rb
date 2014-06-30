@@ -34,6 +34,14 @@ class SetlistSong < ActiveRecord::Base
     song.text
   end
 
+  def info
+    song.info
+  end
+
+  def slides
+    song.slides
+  end
+
   def spotify_uri
     song.spotify_uri
   end

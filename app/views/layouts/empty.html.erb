@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Setlister</title>
+  <%= stylesheet_link_tag "application" %>
+  <%= stylesheet_link_tag "print", :media => "print" %>
+</head>
+<body>
+  <%= yield %>
+</body>
+<%= javascript_include_tag "application" %>
+<%= yield :javascripts %>
+</html>

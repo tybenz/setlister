@@ -1,5 +1,9 @@
-<%= form_for(@song) do |f| %>
-  <h2 class="page-header">Add Song <%= f.submit "Save", :class => "add button" %></h2>
+<%= form_for(@song, :url => group_songs_path(@group)) do |f| %>
+  <h1 class="page-header">
+    New Song
+    <%= f.submit "Save", :class => "btn btn-primary pull-right" %>
+    <%= f.submit "Link to Spotify", :class => "btn btn-success pull-right", :"data-toggle" => "modal", :"data-target" => "#spotify-modal" %>
+  </h1>
 
   <%= render "form", :f => f %>
 <% end %>

@@ -2,23 +2,66 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Setlister</title>
+  <title>Setlister <%= !@page_title.blank? ? "| #{@page_title}" : "" %></title>
+
+  <script src="//use.edgefonts.net/ubuntu-condensed:n4;ubuntu:n3,i3,n4,i4,n5,i5,n7,i7;ubuntu-mono:n4,n7.js"></script>
   <%= stylesheet_link_tag "application" %>
   <%= stylesheet_link_tag "print", :media => "print" %>
 </head>
-<body>
-  <header>
-    <nav>
-      <ul>
-        <li><a class="logo" href="<%= root_url %>">Setlister</a></li>
-        <li><a href="<%= songs_path %>">Songs</a></li>
-        <li><a href="<%= setlists_path %>">Setlists</a></li>
-      </ul>
-    </nav>
-  </header>
-  <section>
+<body data-spy="scroll" data-target="#song-nav" class="<%= params[:controller] %>">
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="shell">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <%= link_to "SETLISTER", root_path, :class => "navbar-brand" %>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <% if signed_in? %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Groups <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <% current_user.groups.each do |group| %>
+                  <li><%= link_to group.name, group_path(group) %></li>
+                <% end %>
+                <li class="divider"></li>
+                <li><%= link_to "Create a Group", groups_new_path %></li>
+                <li><%= link_to "Join a Group", "#" %></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Profile</a></li>
+                <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete, :class => "auth" %></li>
+              </ul>
+            </li>
+          <% else %>
+            <li><%= link_to "Sign In", new_user_session_path, :class => "auth" %></li>
+          <% end %>
+
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div>
+  </nav>
+
+  <main class="shell">
     <%= yield %>
-  </section>
+  </main>
+
+  <footer>
+    <div class="row shell">
+      <div class="col-sm-12">&copy; Setlister&trade; 2013</div>
+    </div>
+  </footer>
 </body>
 <%= javascript_include_tag "application" %>
 <%= yield :javascripts %>

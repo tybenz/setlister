@@ -12,9 +12,3 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require webpro
-//= require mustache
-
-$(function() {
-  $( '.builder, form' ).wpForm( { ajaxSubmit: false } );
-});

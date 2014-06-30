@@ -8,9 +8,9 @@ development:
     :password: "setlister"
 
 production:
-  :host: "setlister.tybenz.com"
+  :host: "setlister.lifepointoakdale.org"
   :smtp:
-    :domain: "setlister.tybenz.com"
+    :domain: "setlister.lifepointoakdale.org"
     :host: <%= ENV['MAILGUN_SMTP_SERVER'] %>
     :port: <%= ENV['MAILGUN_SMTP_PORT'] %>
     :username: <%= ENV['MAILGUN_SMTP_LOGIN'] %>

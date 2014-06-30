@@ -1,5 +1,8 @@
+require 'open-uri'
 class SetlistsController < ApplicationController
-  before_filter :is_admin, :except => [:index, :show]
+  before_filter :is_admin, :except => [:index, :show, :slideshow]
+  before_filter :get_backgrounds, :only => [:slideshow]
+  before_filter :group
 
   respond_to :html, :json
 
@@ -12,7 +15,7 @@ class SetlistsController < ApplicationController
   def create
     @setlist = Setlist.create(params[:setlist])
 
-    respond_with @setlist
+    redirect_to group_setlists_path(@group)
   end
 
   def edit
@@ -25,7 +28,7 @@ class SetlistsController < ApplicationController
     @setlist = Setlist.find(params[:id])
     @setlist.update_attributes(params[:setlist])
 
-    respond_with @setlist
+    redirect_to group_setlist_path(@group, @setlist)
   end
 
   def index
@@ -45,7 +48,14 @@ class SetlistsController < ApplicationController
 
     @setlist.destroy
 
-    redirect_to setlist_path(@setlist)
+    redirect_to group_setlists_path(@group)
+  end
+
+  def slideshow
+    @setlist = Setlist.find(params[:id])
+    @full = params[:full]
+
+    render :slideshow, :layout => "empty"
   end
 
   private
@@ -54,5 +64,18 @@ class SetlistsController < ApplicationController
       flash[:notice] = "You have to be an admin to do that."
       redirect_to root_path
     end
+  end
+
+  def get_backgrounds
+    @backgrounds = []
+    Dir.foreach('app/assets/images/ss-backgrounds') do |fname|
+      if fname != '..' && fname != '.'
+        @backgrounds << fname
+      end
+    end
+  end
+
+  def group
+    @group = Group.where("lower(name) = ?", params[:group_id].downcase).first
   end
 end

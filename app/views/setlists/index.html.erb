@@ -1,7 +1,7 @@
-<h2 class="page-header">Setlists<%= link_to "Add", new_setlist_path, :class => "add button" %></h2>
+<h1 class="page-header">Setlists</h1>
 <div class="builder">
   <div class="builder-inner">
-    <table>
+    <table class="table table-bordered table-striped">
       <tr>
         <th width="50"></th>
         <th width="1110">Name</th>
@@ -11,11 +11,12 @@
       <% @setlists.each do |setlist| %>
       <tr>
         <td><%= i %>.</td>
-        <td class="setlist-name"><%= link_to(setlist.title, setlist_path(setlist)) %></td>
+        <td class="setlist-name"><%= link_to(setlist.title, group_setlist_path(@group, setlist)) %></td>
         <td class="actions">
-          <%= link_to("", setlist_path(setlist), :class => "icon-eye-open") %>
-          <%= link_to("", edit_setlist_path(setlist), :class => "icon-pencil") %>
-          <%= link_to("", setlist_path(setlist), :class => "icon-trash", :method => "delete", :confirm => "Are you sure?") %>
+          <%= link_to("", group_setlist_path(@group, setlist), :class => "icon-eye-open") %>
+          <%= link_to("", edit_group_setlist_path(@group, setlist), :class => "icon-pencil") %>
+          <%= link_to("", group_setlist_path(@group, setlist), :class => "icon-trash", :method => "delete", :confirm => "Are you sure?") %>
+          <%= link_to("", slideshow_group_setlist_path(@group, setlist), :class => "icon-play-circle") %>
         </td>
       </tr>
       <% i += 1 %>

@@ -12,8 +12,10 @@
   </script>
 <% end %>
 
+<div id="setlist-id"><%= @setlist.id %></div>
+
 <% if params[:action] == "edit" %>
-  <%= form_for(@setlist) do |f| %>
+  <%= form_for(@setlist, :url => group_setlist_path(@group, @setlist)) do |f| %>
   <div class="hidden-form">
     <%= f.fields_for :setlist_songs do |builder| %>
       <div class="song-fields">
@@ -26,8 +28,31 @@
   <% end %>
 <% end %>
 
+<div class="flyout song-info">
+  <ul>
+    <li class="head">Song Info</li>
+  </ul>
+  <% @setlist.setlist_songs.each do |song| %>
+    <div id="<%= song.title.gsub(' ','-') %>-info" class="song-info-content"><%= song.info ? auto_link(song.info).html_safe : "None" %></div>
+  <% end %>
+</div>
+
 <div class="builder">
-  <h2>Setlist: <%= @setlist.title %> <%= link_to("Save", "#", :class => "save-setlist button") if params[:action] == "edit" %></h2>
+  <h2>
+    Setlist: <%= @setlist.title %>
+    <% if params[:action] == "edit" %>
+      <%= link_to("Save", "#", :class => "save-setlist button") %>
+      <%= text_field :setlist, :print, :class => "edit-print" %>
+      <%= label :setlist, :print, :class => "edit-print-label" %>
+      <%= text_field :setlist, :print_without_capo, :class => "edit-print" %>
+      <%= label :setlist, :print_without_capo, :class => "edit-print-label" %>
+    <% else %>
+      <% button_text = @setlist.print ? "Print (#{@setlist.print})" : "Print" %>
+      <%= link_to(button_text, "#", :class => "print-setlist button") %>
+      <% button_text = @setlist.print_without_capo ? "Print w/o Capo (#{@setlist.print_without_capo})" : "Print w/o Capo" %>
+      <%= link_to(button_text, "#", :class => "print-setlist-without-capo button", :style => "margin-right: 10px") %>
+    <% end %>
+  </h2>
   <div class="spotify-player" id="spotify-player">
     <iframe src="https://embed.spotify.com/?uri=<%= @setlist.setlist_songs.first ? @setlist.setlist_songs.first.spotify_uri : "" %>" width="100%" height="80" frameborder="0" allowtransparency="true"></iframe>
   </div>
@@ -56,9 +81,14 @@
         </td>
         <td class="actions">
           <%= link_to("", song_path(song.song), :class => "icon-eye-open") %>
-          <%= link_to("", edit_song_path(song.song), :class => "icon-pencil") %>
-          <%= link_to("", setlist_song_path(song), :class => "icon-trash", :method => "delete", :confirm => "Are you sure?") %>
+          <% if signed_in? && current_user.admin? %>
+            <%= link_to("", edit_song_path(song.song), :class => "icon-pencil") %>
+            <%= link_to("", setlist_song_path(song), :class => "icon-trash", :method => "delete", :confirm => "Are you sure?") %>
+          <% end %>
           <%= link_to("", "#", :class => "icon-headphones", :"data-spotify-uri" => song.spotify_uri) %>
+          <% if !song.info.blank? %>
+            <%= link_to("", "#", :class => "icon-info-sign", :"data-info" => song.title.gsub(' ', '-')) %>
+          <% end %>
         </td>
       </tr>
       <% i += 1 %>

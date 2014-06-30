@@ -1,0 +1,49 @@
+<% ( @full ? 1 : 2 ).times do |i| %>
+  <div class="slideshow<%= " preview" if i == 0 && !@full %><%= " full" if @full %>">
+    <div class="slideshow-clip">
+      <div class="slideshow-view">
+        <% @setlist.setlist_songs.each do |song| %>
+          <% song.slides.each do |slide| %>
+            <% if !slide.blank? %>
+              <div class="slideshow-slide">
+                <div class="slideshow-slide-content" style="white-space: pre"><%= slide %></div><br /><br />
+              </div>
+            <% end %>
+          <% end %>
+          <div class="slideshow-slide"><div class="slideshow-slide-content">&nbsp;</div></div>
+          <div class="separator">
+            <button class="button add-slide">+</button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<% if !@full %>
+  <div class="slideshow-backgrounds">
+    <div class="slideshow-backgrounds-view">
+      <% @backgrounds.each do |bg| %>
+        <div class="slideshow-backgrounds-background" style="background-image: url(/assets/ss-backgrounds/<%= bg %>)">
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="slideshow-backgrounds-background draggable"></div>
+  <button class="button done-editing-slideshow">Done</button>
+  <button class="button edit-slideshow">Edit</button>
+  <button class="button start-slideshow">Start Slideshow</button>
+<% end %>
+<% content_for :javascripts do %>
+  <script type="text/javascript" charset="utf-8">
+    var Slideshow = {
+      backgrounds: <%= raw @backgrounds.to_json %>
+    };
+  </script>
+  <% if @full %>
+    <script type="text/javascript" charset="utf-8">
+      Slideshow.fullScreen = true;
+    </script>
+  <% end %>
+  <%= javascript_include_tag "slideshow.js" %>
+  <%= javascript_include_tag "mustache.js" %>
+<% end %>

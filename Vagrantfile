@@ -10,9 +10,7 @@ Vagrant::Config.run do |config|
   config.vm.forward_port 80, 8088
   config.vm.forward_port 22, 2255
 
-  if !(RbConfig::CONFIG['host_os'] =~ /mswin32/)
-    config.vm.share_folder("v-root", "/vagrant", ".", :nfs => true)
-  end
+  config.vm.share_folder("v-root", "/vagrant", ".", :nfs => true)
 
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = "vendor/cookbooks"

@@ -1,0 +1,78 @@
+<h1 class="page-header">
+  <%= @group.name %>
+  <%= link_to "New Setlist", new_group_setlist_path(@group), :class => "btn btn-success pull-right" %>
+  <%= link_to "New Song", new_group_song_path(@group), :class => "btn btn-primary pull-right" %>
+</h1>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        Most Used Songs
+      </div>
+      <div class="panel-content">
+        <div class="list-group">
+          <a href="#" class="list-group-item">Salvation Is Here</a>
+          <a href="#" class="list-group-item">Our God</a>
+          <a href="#" class="list-group-item">The Time Has Come</a>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        All Songs
+      </div>
+      <div class="panel-content">
+        <div class="list-group">
+          <a href="#" class="list-group-item">Our God</a>
+          <a href="#" class="list-group-item">The Time Has Come</a>
+          <a href="#" class="list-group-item">Salvation Is Here</a>
+          <a href="#" class="list-group-item">Our God</a>
+          <a href="#" class="list-group-item">The Time Has Come</a>
+          <a href="#" class="list-group-item">Salvation Is Here</a>
+          <a href="#" class="list-group-item">Our God</a>
+          <a href="#" class="list-group-item">The Time Has Come</a>
+          <a href="#" class="list-group-item">Salvation Is Here</a>
+          <a href="#" class="list-group-item">Our God</a>
+          <a href="#" class="list-group-item">The Time Has Come</a>
+          <a href="#" class="list-group-item">More...</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        Most Recent Setlists
+      </div>
+      <div class="panel-content">
+        <div class="list-group">
+          <a href="#" class="list-group-item">10/22 Sunday</a>
+          <a href="#" class="list-group-item">10/15 Wednesday</a>
+          <a href="#" class="list-group-item">10/11 Sunday</a>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        All Setlists
+      </div>
+      <div class="panel-content">
+        <div class="list-group">
+          <a href="#" class="list-group-item">Sunday 10/22</a>
+          <a href="#" class="list-group-item">Wednesday 10/11</a>
+          <a href="#" class="list-group-item">Sunday 10/22</a>
+          <a href="#" class="list-group-item">Sunday 10/15</a>
+          <a href="#" class="list-group-item">Wednesday 10/11</a>
+          <a href="#" class="list-group-item">Sunday 10/22</a>
+          <a href="#" class="list-group-item">Sunday 10/15</a>
+          <a href="#" class="list-group-item">Wednesday 10/11</a>
+          <a href="#" class="list-group-item">Sunday 10/22</a>
+          <a href="#" class="list-group-item">Sunday 10/15</a>
+          <a href="#" class="list-group-item">Wednesday 10/11</a>
+          <a href="#" class="list-group-item">More...</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-<%= form_for(@setlist) do |f| %>
+<%= form_for(@setlist, :url => group_setlists_path(@group, @setlist)) do |f| %>
   <div class="field">
     <%= f.label :title %>
     <%= f.text_field :title, :autofocus => true %>

@@ -11,7 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130417220111) do
+ActiveRecord::Schema.define(:version => 20131011175645) do
+
+  create_table "groups", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "setlist_songs", :force => true do |t|
     t.integer  "song_id"
@@ -25,8 +31,11 @@ ActiveRecord::Schema.define(:version => 20130417220111) do
 
   create_table "setlists", :force => true do |t|
     t.string   "title"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "print"
+    t.integer  "print_without_capo"
+    t.integer  "group_id"
   end
 
   create_table "songs", :force => true do |t|
@@ -40,6 +49,13 @@ ActiveRecord::Schema.define(:version => 20130417220111) do
     t.datetime "updated_at",  :null => false
     t.string   "spotify_uri"
     t.integer  "capo"
+    t.text     "info"
+    t.integer  "group_id"
+  end
+
+  create_table "user_groups", :force => true do |t|
+    t.integer "user_id"
+    t.integer "group_id"
   end
 
   create_table "users", :force => true do |t|
